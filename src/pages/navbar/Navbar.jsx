@@ -4,35 +4,24 @@ import {
   IconButton,
   InputBase,
   Typography,
-  Select,
-  MenuItem,
-  FormControl,
   useTheme,
   useMediaQuery,
 } from "@mui/material";
 import {
   Search,
-  Message,
   DarkMode,
   LightMode,
-  Notifications,
-  Help,
   Menu,
   Close,
   Scale,
 } from "@mui/icons-material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import LogoutIcon from "@mui/icons-material/Logout";
 import FlexBetween from "../../components/FlexBetween";
 import DataContext from "../../context/DataContext";
-import {
-  ManageAccountsOutlined,
-  EditOutlined,
-  LocationOnOutlined,
-  WorkOutlineOutlined,
-} from "@mui/icons-material";
+import { ManageAccountsOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -115,6 +104,11 @@ const Navbar = () => {
               <ManageAccountsOutlined sx={{ fontSize: "25px" }} />
             </IconButton>
           </Link>
+          <Link to={"/supportdev"}>
+            <IconButton>
+              <VolunteerActivismIcon sx={{ fontSize: "25px" }} />
+            </IconButton>
+          </Link>
           <Link to={"/reportbug"}>
             <IconButton>
               <BugReportIcon sx={{ fontSize: "25px" }} />
@@ -188,6 +182,11 @@ const Navbar = () => {
             <Link to={"/editprofile"}>
               <IconButton>
                 <ManageAccountsOutlined sx={{ fontSize: "25px" }} />
+              </IconButton>
+            </Link>
+            <Link to={"/supportdev"}>
+              <IconButton>
+                <VolunteerActivismIcon sx={{ fontSize: "25px" }} />
               </IconButton>
             </Link>
             <Link to={"/reportbug"}>
