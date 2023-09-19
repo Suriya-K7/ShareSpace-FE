@@ -32,3 +32,8 @@ body,
 ::-webkit-scrollbar-track {
   background-color: #2d2d2d;
 }
+.login__color__mode {
+  position: absolute !important;
+  top: 18px;
+  right: 10px;
+}

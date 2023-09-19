@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   TextField,
@@ -6,7 +6,20 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
 } from "@mui/material";
+import {
+  Search,
+  DarkMode,
+  LightMode,
+  Menu,
+  Close,
+  Scale,
+} from "@mui/icons-material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import DataContext from "../../context/DataContext";
@@ -21,9 +34,20 @@ const Login = () => {
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
-  const { handleSignIn } = useContext(DataContext);
+  const { handleSignIn, handleMode } = useContext(DataContext);
 
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const [open, openchange] = useState(false);
+
+  const dark = theme.palette.neutral.dark;
+
+  const functionopenpopup = () => {
+    openchange(true);
+  };
+  const closepopup = () => {
+    openchange(false);
+  };
 
   const schema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
@@ -68,6 +92,17 @@ const Login = () => {
           color='primary'
         >
           ShareSpace
+          <IconButton
+            className='login__color__mode'
+            style={{ float: "right" }}
+            onClick={handleMode}
+          >
+            {theme.palette.mode === "dark" ? (
+              <DarkMode sx={{ fontSize: "25px" }} />
+            ) : (
+              <LightMode sx={{ color: dark, fontSize: "25px" }} />
+            )}
+          </IconButton>
         </Typography>
       </Box>
       <Box
@@ -85,7 +120,7 @@ const Login = () => {
           align='center'
           sx={{ mb: "1.5rem" }}
         >
-          Welcome to ShareSpace, the Social Media for Sociopaths!
+          Welcome to ShareSpace, Social Media App for Sociopaths!
         </Typography>
         <Formik
           onSubmit={handleSubmit}
@@ -181,7 +216,82 @@ const Login = () => {
             </form>
           )}
         </Formik>
+        <Button
+          fullWidth
+          sx={{
+            m: "2rem 0",
+            p: "1rem",
+            backgroundColor: palette.primary.main,
+            color: palette.background.alt,
+            "&:hover": {
+              color: palette.primary.main,
+            },
+          }}
+          onClick={functionopenpopup}
+        >
+          Demo Credentials
+        </Button>
       </Box>
+      <Dialog
+        open={open}
+        onClose={closepopup}
+        fullWidth
+        maxWidth='md'
+      >
+        <DialogTitle>
+          <Typography
+            fontWeight='400'
+            fontSize='1.5rem'
+            color='primary'
+            align='center'
+          >
+            Welcome to ShareSpace, the Social Media for Sociopaths!
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <Typography
+            fontWeight='400'
+            fontSize='1rem'
+            color='primary'
+            align='justify'
+          >
+            ShareSpace app is a vibrant platform where you can capture and share
+            your life's memorable moments through photos and stories. Stay
+            connected with friends.
+          </Typography>
+          <hr />
+          <Typography
+            fontWeight='400'
+            color='primary'
+          >
+            for Login use below ID or create new one:
+          </Typography>
+          <Typography
+            fontWeight='400'
+            color='primary'
+          >
+            Email:
+          </Typography>
+          demo@gmail.com
+          <br />
+          <Typography
+            fontWeight='400'
+            color='primary'
+          >
+            Password:
+          </Typography>
+          demo@123
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={closepopup}
+            color='error'
+            variant='contained'
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
       <ToastContainer
         position='top-right'
         autoClose={1000}
