@@ -12,14 +12,7 @@ import {
   DialogTitle,
   IconButton,
 } from "@mui/material";
-import {
-  Search,
-  DarkMode,
-  LightMode,
-  Menu,
-  Close,
-  Scale,
-} from "@mui/icons-material";
+import { DarkMode, LightMode } from "@mui/icons-material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import DataContext from "../../context/DataContext";
